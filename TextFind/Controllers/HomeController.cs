@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using TextFind.Models;
 using TextFind.Services;
 
@@ -14,14 +9,11 @@ namespace TextFind.Controllers
     {
         private readonly ITextFindService _textFindService;
 
-        public HomeController(ITextFindService textFindService)
-        {
-            _textFindService = textFindService;
-        }
+        public HomeController(ITextFindService textFindService) => _textFindService = textFindService;
 
         public IActionResult Index(TextFindViewModel model)
         {
-            if ((model.Text != null) && (model.SubText != null))
+            if (!string.IsNullOrEmpty(model.Text) && !string.IsNullOrEmpty(model.SubText))
             {
                 model.Results = _textFindService.FindSubString(model.Text, model.SubText);
             }
@@ -30,9 +22,6 @@ namespace TextFind.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
