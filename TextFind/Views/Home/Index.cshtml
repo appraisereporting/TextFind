@@ -1,7 +1,47 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model TextFind.Models.TextFindViewModel
+
+@{
+    ViewData["Title"] = "Text Find";
 }
 
 <div class="text-center">
     <h1 class="display-4">Text Find</h1>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubText" class="control-label"></label>
+                <input asp-for="SubText" class="form-control" />
+                <span asp-validation-for="SubText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Results" class="control-label"></label>
+                <ul>
+                    @if (Model.Results.Count == 0)
+                    {
+                        <li>No match</li>
+                    }
+                    else
+                    {
+                        @foreach (int result in Model.Results)
+                        {
+                            <li>@result</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </form>
+    </div>
 </div>
