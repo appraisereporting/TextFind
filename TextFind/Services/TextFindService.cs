@@ -1,11 +1,16 @@
+using System;
 using System.Collections.Generic;
 
 namespace TextFind.Services
 {
     public class TextFindService : ITextFindService
     {
-        public IEnumerable<int> FindSubString(string text, string subText)
+        public IReadOnlyList<int> FindSubString(string text, string subText)
         {
+            //Assumptions
+            if (text == null) throw new ArgumentException("text must not be null");
+            if (string.IsNullOrEmpty(subText)) throw new ArgumentException("subText must not be null or empty");
+
             var results = new List<int>(); 
             
             int start = 0;
