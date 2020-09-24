@@ -16,9 +16,9 @@ namespace TextFindTests
             ITextFindService textFindService = new TextFindService();
 
             //assert
-            Assert.Throws<ArgumentException>(() => textFindService.FindSubString(null, "subText"));
-            Assert.Throws<ArgumentException>(() => textFindService.FindSubString("text", null));
-            Assert.Throws<ArgumentException>(() => textFindService.FindSubString("text", ""));
+            Assert.Throws<ArgumentException>(() => textFindService.FindSubString(null, "subText", false));
+            Assert.Throws<ArgumentException>(() => textFindService.FindSubString("text", null, false));
+            Assert.Throws<ArgumentException>(() => textFindService.FindSubString("text", "", false));
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace TextFindTests
             var expectedResult = new List<int> { 0 };
 
             //Result
-            var result = textFindService.FindSubString(text, subText);
+            var result = textFindService.FindSubString(text, subText, false);
 
             //Test
             Assert.Equal(expectedResult.Count, result.Count);
@@ -58,7 +58,7 @@ namespace TextFindTests
             var expectedResult = new List<int> { 4 };
 
             //Result
-            var result = textFindService.FindSubString(text, subText);
+            var result = textFindService.FindSubString(text, subText, false);
 
             //Test
             Assert.Equal(expectedResult.Count, result.Count);
@@ -82,7 +82,7 @@ namespace TextFindTests
             var expectedResult = new List<int> { 25 };
 
             //Result
-            var result = textFindService.FindSubString(text, subText);
+            var result = textFindService.FindSubString(text, subText, false);
 
             //Test
             Assert.Equal(expectedResult.Count, result.Count);
@@ -106,7 +106,7 @@ namespace TextFindTests
             var expectedResult = new List<int> { 0 };
 
             //Result
-            var result = textFindService.FindSubString(text, subText);
+            var result = textFindService.FindSubString(text, subText, false);
 
             //Test
             Assert.Equal(expectedResult.Count, result.Count);
@@ -130,7 +130,7 @@ namespace TextFindTests
             var expectedResult = new List<int> { 4 };
 
             //Result
-            var result = textFindService.FindSubString(text, subText);
+            var result = textFindService.FindSubString(text, subText, false);
 
             //Test
             Assert.Equal(expectedResult.Count, result.Count);
@@ -154,7 +154,7 @@ namespace TextFindTests
             var expectedResult = new List<int> { 24 };
 
             //Result
-            var result = textFindService.FindSubString(text, subText);
+            var result = textFindService.FindSubString(text, subText, false);
 
             //Test
             Assert.Equal(expectedResult.Count, result.Count);
@@ -178,7 +178,7 @@ namespace TextFindTests
             var expectedResult = new List<int> { 0, 26 };
 
             //Result
-            var result = textFindService.FindSubString(text, subText);
+            var result = textFindService.FindSubString(text, subText, false);
 
             //Test
             Assert.Equal(expectedResult.Count, result.Count);
@@ -202,7 +202,7 @@ namespace TextFindTests
             var expectedResult = new List<int> { 0, 1 };
 
             //Result
-            var result = textFindService.FindSubString(text, subText);
+            var result = textFindService.FindSubString(text, subText, false);
 
             //Test
             Assert.Equal(expectedResult.Count, result.Count);
@@ -212,5 +212,30 @@ namespace TextFindTests
                 Assert.Equal(expectedResult[i], result[i]);
             }
         }
+        
+        [Fact]
+        public void FindSubStringResultMultipleCaseInsensitive()
+        {
+            //arrange
+            ITextFindService textFindService = new TextFindService();
+
+            string text = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string subText = "a";
+
+            //Expected value
+            var expectedResult = new List<int> { 0, 26 };
+
+            //Result
+            var result = textFindService.FindSubString(text, subText, true);
+
+            //Test
+            Assert.Equal(expectedResult.Count, result.Count);
+
+            for (int i = 0; i < expectedResult.Count; i++)
+            {
+                Assert.Equal(expectedResult[i], result[i]);
+            }
+        }
+
     }
 }

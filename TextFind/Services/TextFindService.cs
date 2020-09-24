@@ -5,7 +5,7 @@ namespace TextFind.Services
 {
     public class TextFindService : ITextFindService
     {
-        public IReadOnlyList<int> FindSubString(string text, string subText)
+        public IReadOnlyList<int> FindSubString(string text, string subText, bool caseInsentitiveSearch)
         {
             //Assumptions
             if (text == null) throw new ArgumentException("text must not be null");
@@ -19,7 +19,7 @@ namespace TextFind.Services
 
             while ((start <= end) && (find > -1))
             {
-                find = text.IndexOf(subText, start);
+                find = text.IndexOf(subText, start, caseInsentitiveSearch ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
                 if (find != -1)
                 {
                     results.Add(find);

@@ -6,6 +6,7 @@ namespace TextFind.Models
     {
         public string Text { get; set; } = "";
         public string SubText { get; set; } = "";
+        public bool CaseInsentitiveSearch { get; set; } = false;
         public IReadOnlyList<int> Results { get; set; } = new List<int>();
     }
 }

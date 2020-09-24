@@ -15,7 +15,7 @@ namespace TextFind.Controllers
         {
             if (!string.IsNullOrEmpty(model.Text) && !string.IsNullOrEmpty(model.SubText))
             {
-                model.Results = _textFindService.FindSubString(model.Text, model.SubText);
+                model.Results = _textFindService.FindSubString(model.Text, model.SubText, model.CaseInsentitiveSearch);
             }
 
             return View(model);
