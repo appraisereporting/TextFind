@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TextFind.Services
+namespace TextFindLibrary
 {
     public class TextFindService : ITextFindService
     {

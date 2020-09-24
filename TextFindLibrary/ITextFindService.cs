@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TextFind.Services
+namespace TextFindLibrary
 {
     public interface ITextFindService
     {

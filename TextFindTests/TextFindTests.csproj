@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TextFind\TextFind.csproj" />
+    <ProjectReference Include="..\TextFindLibrary\TextFindLibrary.csproj" />
   </ItemGroup>
 
 </Project>
