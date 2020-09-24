@@ -29,16 +29,16 @@
             <div class="form-group">
                 <label asp-for="Results" class="control-label"></label>
                 <ul>
-                    @if (Model.Results.Count == 0)
-                    {
-                        <li>No match</li>
-                    }
-                    else
+                    @if (Model.Results.Any())
                     {
                         @foreach (int result in Model.Results)
                         {
                             <li>@result</li>
                         }
+                    }
+                    else
+                    {
+                        <li>No match</li>
                     }
                 </ul>
             </div>

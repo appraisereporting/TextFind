@@ -6,6 +6,6 @@ namespace TextFind.Models
     {
         public string Text { get; set; }
         public string SubText { get; set; }
-        public List<int> Results { get; set; } = new List<int>();
+        public IEnumerable<int> Results { get; set; } = new List<int>();
     }
 }

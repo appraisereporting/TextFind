@@ -6,37 +6,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TextFind.Models;
+using TextFind.Services;
 
 namespace TextFind.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ITextFindService _textFindService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ITextFindService textFindService)
         {
-            _logger = logger;
+            _textFindService = textFindService;
         }
 
         public IActionResult Index(TextFindViewModel model)
         {
             if ((model.Text != null) && (model.SubText != null))
             {
-                int start = 0;
-                int end = model.Text.Length;
-                int find = 0;
-
-                while ((start <= end) && (find > -1))
-                {
-                    find = model.Text.IndexOf(model.SubText, start);
-                    if (find != -1)
-                    {
-                        model.Results.Add(find);
-
-                        //start position moved one character left - repeated characters in subText are valid eg looking for xx in xxx gives two
-                        start = find + 1;
-                    }
-                }
+                model.Results = _textFindService.FindSubString(model.Text, model.SubText);
             }
 
             return View(model);
